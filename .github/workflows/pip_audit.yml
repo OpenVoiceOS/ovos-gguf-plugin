@@ -9,3 +9,13 @@ jobs:
   pip_audit:
     uses: OpenVoiceOS/gh-automations/.github/workflows/pip-audit.yml@dev
     secrets: inherit
+    with:
+      # T-2377: ids the audit reports at dev with no floor that can fix them.
+      # Review the list when diskcache publishes a release after 5.6.3.
+      # PYSEC-2026-2447: diskcache 5.6.3 (from llama-cpp-python) is the
+      #   latest release, the advisory names no fix.
+      # The first id is the shared default. A caller value replaces the
+      # default, so it is repeated here.
+      ignore_vulns: |
+        GHSA-r9hx-vwmv-q579
+        PYSEC-2026-2447
