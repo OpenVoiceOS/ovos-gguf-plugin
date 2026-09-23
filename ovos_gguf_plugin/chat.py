@@ -1,10 +1,19 @@
 import os
+import re
 from typing import Dict, Optional, List, Any, Iterable
 from sentence_stream import SentenceBoundaryDetector
 
 from llama_cpp import Llama
 from ovos_plugin_manager.templates.agents import ChatEngine, AgentMessage, MessageRole, ToolsArg
 from ovos_utils.log import LOG
+
+#: A sentence the model finished, as opposed to one max_tokens cut short.
+#: ``SentenceBoundaryDetector`` reports a boundary only when another sentence
+#: starts after it, so the last sentence of every answer stays in ``finish()``
+#: and is complete far more often than not. Dropping it unread loses the end
+#: of the answer, and for a one-sentence answer loses all of it.
+SENTENCE_COMPLETE = re.compile(
+    r"""[.!?\u2026\u3002\uff01\uff1f]['")\]}\u00bb\u201d\u2019]*\s*$""")
 
 
 class GGUFChatEngine(ChatEngine):
@@ -176,10 +185,14 @@ class GGUFChatEngine(ChatEngine):
             Iterable[str]: A stream of tokens/partial text.
         """
         boundary_detector = SentenceBoundaryDetector()
+        spoke = False
         for tok in self.stream_tokens(messages):
-            yield from boundary_detector.add_chunk(tok)
+            for sentence in boundary_detector.add_chunk(tok):
+                spoke = True
+                yield sentence
         final_text = boundary_detector.finish()
-        if final_text and not self.config.get("drop_incomplete_sentences", True):
+        if final_text and (SENTENCE_COMPLETE.search(final_text) or not spoke or
+                           not self.config.get("drop_incomplete_sentences", True)):
             yield final_text
 
 
