@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.2.4a1](https://github.com/OpenVoiceOS/ovos-gguf-plugin/tree/1.2.4a1) (2026-09-23)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-gguf-plugin/compare/1.2.3a1...1.2.4a1)
+
+**Merged pull requests:**
+
+- fix\(chat\): speak the last sentence instead of dropping it [\#38](https://github.com/OpenVoiceOS/ovos-gguf-plugin/pull/38) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
+
 ## [1.2.3a1](https://github.com/OpenVoiceOS/ovos-gguf-plugin/tree/1.2.3a1) (2026-08-13)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-gguf-plugin/compare/1.2.2a1...1.2.3a1)
