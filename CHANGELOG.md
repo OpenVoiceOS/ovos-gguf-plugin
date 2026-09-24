@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.2.6a1](https://github.com/OpenVoiceOS/ovos-gguf-plugin/tree/1.2.6a1) (2026-09-24)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-gguf-plugin/compare/1.2.5a1...1.2.6a1)
+
+**Merged pull requests:**
+
+- fix: end\_markers accepts an empty list, a plain string and null [\#42](https://github.com/OpenVoiceOS/ovos-gguf-plugin/pull/42) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
+
 ## [1.2.5a1](https://github.com/OpenVoiceOS/ovos-gguf-plugin/tree/1.2.5a1) (2026-09-24)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-gguf-plugin/compare/1.2.4a2...1.2.5a1)
