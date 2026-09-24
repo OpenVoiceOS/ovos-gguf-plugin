@@ -28,7 +28,12 @@ def strip_end_markers(chunks: Iterable[str],
     held at the end is yielded: a partial marker is only a partial marker
     once the stream is over, and dropping real text would be worse.
     """
-    markers = tuple(markers)
+    # Handle string as a single marker, and empty list as no stripping
+    markers = (markers,) if isinstance(markers, str) else tuple(markers)
+    if not markers:
+        # Empty marker set: pass through unchanged
+        yield from chunks
+        return
     longest = max(len(m) for m in markers)
     buffer = ""
     for chunk in chunks:

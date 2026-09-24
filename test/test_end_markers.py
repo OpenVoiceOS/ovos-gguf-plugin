@@ -161,3 +161,33 @@ def test_stream_tokens_honours_a_configured_marker_set():
     engine = _engine(["Done.", "<|custom|>"],
                      config={"end_markers": ["<|custom|>"]})
     assert "".join(engine.stream_tokens([])) == "Done."
+
+
+def test_empty_markers_list_passes_the_stream_through():
+    """An empty marker set must disable stripping, not raise.
+
+    The empty list is the natural way to switch the feature off in a config.
+    """
+    assert _stripped(["Done.", "<|im_end|>"]) == "Done."
+    # With empty markers, everything passes through
+    mod = _module()
+    result = "".join(mod.strip_end_markers(["Done.", "<|im_end|>"], markers=[]))
+    assert result == "Done.<|im_end|>"
+
+
+def test_plain_string_end_markers_must_be_rejected_or_wrapped():
+    """A plain string marker must be rejected or treated as a single marker.
+
+    Users naturally write a single marker as a string in config, not as a list.
+    Iterating the string as characters is a bug that silently deletes text.
+    """
+    mod = _module()
+    # This should either raise with a clear error or treat the string as one marker
+    try:
+        result = "".join(mod.strip_end_markers(["Hello there, friend."], 
+                                                markers="<|im_end|>"))
+        # If it doesn't raise, it must work correctly
+        assert result == "Hello there, friend."
+    except (TypeError, ValueError) as e:
+        # If it raises, the error should be clear
+        assert "string" in str(e).lower() or "marker" in str(e).lower()
