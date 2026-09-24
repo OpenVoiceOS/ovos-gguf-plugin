@@ -23,7 +23,7 @@ CMAKE_ARGS="-DGGML_CUDA=on" FORCE_CMAKE=1 pip install llama-cpp-python --force-r
 ## Per-wrapper notes
 
 - **chat** (`GGUFChatEngine`, `opm.agents.chat`): `max_tokens`, `chat_format`,
-  `allow_system_prompts`, `drop_incomplete_sentences`.
+  `allow_system_prompts`, `drop_incomplete_sentences`, `end_markers`.
 - **summarizer** (`GGUFSummarizer`, `opm.agents.summarizer`): `prompt_template`
   (an explicit `{content}` template) overrides the localized `summarize_user` prompt.
 - **translate** (`GGUFTextTranslator`, `opm.lang.translate`): defaults to

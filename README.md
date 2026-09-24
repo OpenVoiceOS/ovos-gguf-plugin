@@ -123,6 +123,7 @@ All wrappers share the same config keys:
 | `verbose` | `True` | llama.cpp verbosity |
 | `max_tokens` | `512` | Maximum tokens to generate |
 | `system_prompt` | locale default | Override the system prompt |
+| `end_markers` | `END_MARKERS` tuple | Text markers to strip from token stream (chat template artifacts) |
 
 See [`docs/configuration.md`](docs/configuration.md) for the full reference, including per-wrapper options and GPU build instructions.
 
