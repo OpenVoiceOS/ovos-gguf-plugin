@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.2.5a1](https://github.com/OpenVoiceOS/ovos-gguf-plugin/tree/1.2.5a1) (2026-09-24)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-gguf-plugin/compare/1.2.4a2...1.2.5a1)
+
+**Merged pull requests:**
+
+- fix: the chat template's end marker is stripped from the token stream [\#40](https://github.com/OpenVoiceOS/ovos-gguf-plugin/pull/40) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
+
 ## [1.2.4a2](https://github.com/OpenVoiceOS/ovos-gguf-plugin/tree/1.2.4a2) (2026-09-23)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-gguf-plugin/compare/1.2.4a1...1.2.4a2)
@@ -129,42 +137,6 @@
 ## [V0.1.0](https://github.com/OpenVoiceOS/ovos-gguf-plugin/tree/V0.1.0) (2025-01-28)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-gguf-plugin/compare/0.1.0...V0.1.0)
-
-## [0.1.0](https://github.com/OpenVoiceOS/ovos-gguf-plugin/tree/0.1.0) (2025-01-28)
-
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-gguf-plugin/compare/0.0.1...0.1.0)
-
-## [0.0.1](https://github.com/OpenVoiceOS/ovos-gguf-plugin/tree/0.0.1) (2025-01-28)
-
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-gguf-plugin/compare/V0.0.0a2...0.0.1)
-
-## [V0.0.0a2](https://github.com/OpenVoiceOS/ovos-gguf-plugin/tree/V0.0.0a2) (2024-11-13)
-
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-gguf-plugin/compare/V0.0.0a1...V0.0.0a2)
-
-## [V0.0.0a1](https://github.com/OpenVoiceOS/ovos-gguf-plugin/tree/V0.0.0a1) (2024-10-25)
-
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-gguf-plugin/compare/0.0.0a0...V0.0.0a1)
-
-## [0.0.0a0](https://github.com/OpenVoiceOS/ovos-gguf-plugin/tree/0.0.0a0) (2024-10-25)
-
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-gguf-plugin/compare/V0.0.0a4...0.0.0a0)
-
-## [V0.0.0a4](https://github.com/OpenVoiceOS/ovos-gguf-plugin/tree/V0.0.0a4) (2024-10-25)
-
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-gguf-plugin/compare/V0.0.0a3...V0.0.0a4)
-
-## [V0.0.0a3](https://github.com/OpenVoiceOS/ovos-gguf-plugin/tree/V0.0.0a3) (2024-10-25)
-
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-gguf-plugin/compare/a9c8d8d311a0cc1a014a40ed540b86a47b78eb87...V0.0.0a3)
-
-**Implemented enhancements:**
-
-- gpu support [\#1](https://github.com/OpenVoiceOS/ovos-gguf-plugin/pull/1) ([JarbasAl](https://github.com/JarbasAl))
-
-**Merged pull requests:**
-
-- feat:semver [\#2](https://github.com/OpenVoiceOS/ovos-gguf-plugin/pull/2) ([JarbasAl](https://github.com/JarbasAl))
 
 
 
