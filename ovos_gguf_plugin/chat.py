@@ -28,7 +28,12 @@ def strip_end_markers(chunks: Iterable[str],
     held at the end is yielded: a partial marker is only a partial marker
     once the stream is over, and dropping real text would be worse.
     """
-    markers = tuple(markers)
+    # Handle string as a single marker, and empty list as no stripping
+    markers = (markers,) if isinstance(markers, str) else tuple(markers)
+    if not markers:
+        # Empty marker set: pass through unchanged
+        yield from chunks
+        return
     longest = max(len(m) for m in markers)
     buffer = ""
     for chunk in chunks:
@@ -211,8 +216,9 @@ class GGUFChatEngine(ChatEngine):
         # The markers are stripped HERE, not in stream_sentences, so every
         # caller of stream_tokens is covered and the boundary detector sees
         # the terminator with nothing glued to it.
+        end_markers = self.config.get("end_markers", END_MARKERS)
         yield from strip_end_markers(
-            _chunks(), self.config.get("end_markers", END_MARKERS))
+            _chunks(), END_MARKERS if end_markers is None else end_markers)
 
     def stream_sentences(self, messages: List[AgentMessage],
                     session_id: str = "default",
