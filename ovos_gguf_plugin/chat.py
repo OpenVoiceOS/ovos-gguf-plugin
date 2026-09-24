@@ -7,6 +7,53 @@ from llama_cpp import Llama
 from ovos_plugin_manager.templates.agents import ChatEngine, AgentMessage, MessageRole, ToolsArg
 from ovos_utils.log import LOG
 
+#: Chat-template end markers a model can emit as literal TEXT instead of as
+#: its end-of-sequence token. A small or heavily quantised build does this:
+#: `smol-llama-101m-chat` at q2_k streams `<|im_end|>` as characters, and
+#: nothing downstream removes it, so it is spoken aloud.
+#:
+#: It also hides a sentence boundary. `SentenceBoundaryDetector` needs a
+#: terminator followed by a space, and a marker glued to the full stop gives
+#: it neither, so `"...second part.<|im_end|>"` never reports a boundary and
+#: leaves in `finish()` as one string with the marker attached.
+END_MARKERS = ("<|im_end|>", "<|endoftext|>", "<|eot_id|>", "<|end|>", "</s>")
+
+
+def strip_end_markers(chunks: Iterable[str],
+                      markers: Iterable[str] = END_MARKERS) -> Iterable[str]:
+    """Yield the stream with chat-template end markers removed.
+
+    A marker can arrive split across chunks, so text that could still be the
+    start of one is held back until the next chunk settles it. Whatever is
+    held at the end is yielded: a partial marker is only a partial marker
+    once the stream is over, and dropping real text would be worse.
+    """
+    markers = tuple(markers)
+    longest = max(len(m) for m in markers)
+    buffer = ""
+    for chunk in chunks:
+        buffer += chunk
+        for marker in markers:
+            buffer = buffer.replace(marker, "")
+        # keep back only as much as could still grow into a marker
+        hold = 0
+        for size in range(1, min(longest, len(buffer)) + 1):
+            tail = buffer[-size:]
+            if any(m.startswith(tail) for m in markers):
+                hold = size
+        if hold:
+            out, buffer = buffer[:-hold], buffer[-hold:]
+        else:
+            out, buffer = buffer, ""
+        if out:
+            yield out
+    if buffer:
+        for marker in markers:
+            buffer = buffer.replace(marker, "")
+        if buffer:
+            yield buffer
+
+
 #: A sentence the model finished, as opposed to one max_tokens cut short.
 #: ``SentenceBoundaryDetector`` reports a boundary only when another sentence
 #: starts after it, so the last sentence of every answer stays in ``finish()``
@@ -155,10 +202,17 @@ class GGUFChatEngine(ChatEngine):
             max_tokens=self.config.get("max_tokens"),
             stream=True
         )
-        for item in ans:
-            chunk = item['choices'][0]["delta"].get("content")
-            if chunk:
-                yield chunk
+        def _chunks():
+            for item in ans:
+                chunk = item['choices'][0]["delta"].get("content")
+                if chunk:
+                    yield chunk
+
+        # The markers are stripped HERE, not in stream_sentences, so every
+        # caller of stream_tokens is covered and the boundary detector sees
+        # the terminator with nothing glued to it.
+        yield from strip_end_markers(
+            _chunks(), self.config.get("end_markers", END_MARKERS))
 
     def stream_sentences(self, messages: List[AgentMessage],
                     session_id: str = "default",
