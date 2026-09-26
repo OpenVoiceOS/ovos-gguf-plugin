@@ -31,7 +31,7 @@ dependencies = [
 test = [
     "pytest",
     "numpy",
-    "ovoscope<1.0.0",
+    "ovoscope<1.5.1",
     "ovos-persona",
     "ovos-solver-failure-plugin",
 ]
