@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.2.8a1](https://github.com/OpenVoiceOS/ovos-gguf-plugin/tree/1.2.8a1) (2026-10-22)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-gguf-plugin/compare/1.2.7a1...1.2.8a1)
+
+**Merged pull requests:**
+
+- fix\(deps\): require ovoscope 1.6.15a1 or later for tests [\#45](https://github.com/OpenVoiceOS/ovos-gguf-plugin/pull/45) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
+
 ## [1.2.7a1](https://github.com/OpenVoiceOS/ovos-gguf-plugin/tree/1.2.7a1) (2026-10-22)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-gguf-plugin/compare/1.2.6a1...1.2.7a1)
