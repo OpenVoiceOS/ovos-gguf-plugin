@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.2.7a1](https://github.com/OpenVoiceOS/ovos-gguf-plugin/tree/1.2.7a1) (2026-10-22)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-gguf-plugin/compare/1.2.6a1...1.2.7a1)
+
+**Merged pull requests:**
+
+- fix\(deps\): accept ovos-plugin-manager 3 [\#44](https://github.com/OpenVoiceOS/ovos-gguf-plugin/pull/44) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
+
 ## [1.2.6a1](https://github.com/OpenVoiceOS/ovos-gguf-plugin/tree/1.2.6a1) (2026-09-24)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-gguf-plugin/compare/1.2.5a1...1.2.6a1)
