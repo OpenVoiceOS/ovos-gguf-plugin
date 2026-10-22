@@ -19,7 +19,7 @@ keywords = [
     "query",
 ]
 dependencies = [
-    "ovos-plugin-manager>=2.3.0a1,<3.0.0",
+    "ovos-plugin-manager>=2.3.0a1",
     "ovos-spec-tools>=0.8.0a2",
     "huggingface-hub",
     "llama-cpp-python",
